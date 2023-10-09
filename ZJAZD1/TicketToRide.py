@@ -68,7 +68,7 @@ class TicketToRide(TwoPlayerGame):
              """
         self.board[int(move) - 1] = self.current_player
 
-    def unmake_move(self, move):  # optional method (speeds up the AI)
+    def unmake_move(self, move):
         """
              Undoes a move in the game by removing the symbol from the selected square. This method is optional and may speed up the AI algorithm.
 
@@ -82,12 +82,12 @@ class TicketToRide(TwoPlayerGame):
 
     def lose(self):
         """
-             Checks whether the game has been completed based on the opponent's score. The game ends when the opponent reaches a certain number of points. In this case 5 points.
+             Checks whether the game has been completed based on the opponent's score. The game ends when the opponent reaches a certain number of points. In this case 3 points.
 
              Returns:
              bool: True if the opponent has scored the required number of points and the game is over, otherwise False.
              """
-        return self.get_score_for_symbol(self.opponent_index) >= 5
+        return self.get_score_for_symbol(self.opponent_index) >= 3
 
     def get_score_for_symbol(self, symbol):
         """
@@ -243,5 +243,5 @@ class TicketToRide(TwoPlayerGame):
 if __name__ == "__main__":
     from easyAI import AI_Player, Negamax
 
-    ai_algo = Negamax(4)
+    ai_algo = Negamax(7)
     TicketToRide([Human_Player(), AI_Player(ai_algo)]).play()
