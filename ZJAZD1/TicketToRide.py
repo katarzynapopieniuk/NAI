@@ -6,7 +6,7 @@
 # 1.Gra jest rozgrywana na planszy 5x7
 # 2.Należy min. 3 razy ułożyć symbol w 1 linii w celu otrzymania 1 punktu
 # 3.Ułożenie więcej symboli niż 3 w jednej linii jest liczone jako kolejna trójka i przyznawany jest kolejny punkt
-# 4.Gra toczy się do uzyskania przez jednego z graczy 5 punktów
+# 4.Gra toczy się do uzyskania przez jednego z graczy 3 punktów
 #
 # INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
 # 1.Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
@@ -181,8 +181,8 @@ class TicketToRide(TwoPlayerGame):
         """
         if self.is_position_valid(pos1 - 1) and self.is_position_valid(pos2 - 1) and self.is_position_valid(pos3 - 1):
             symbol = self.board[pos1 - 1]
-            temp = symbol == self.board[pos2 - 1] and symbol == self.board[pos3 - 1]
-            return temp
+            are_the_same_symbols = symbol == self.board[pos2 - 1] and symbol == self.board[pos3 - 1]
+            return are_the_same_symbols
         else:
             return False
 
