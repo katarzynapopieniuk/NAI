@@ -7,7 +7,16 @@
 # 2.Należy min. 3 razy ułożyć symbol w 1 linii w celu otrzymania 1 punktu
 # 3.Ułożenie więcej symboli niż 3 w jednej linii jest liczone jako kolejna trójka i przyznawany jest kolejny punkt
 # 4.Gra toczy się do uzyskania przez jednego z graczy 5 punktów
-
+#
+# INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
+# 1.Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
+# 2. Pobrać projekt
+# 3. Uruchomić wybraną konsolę/terminal
+# 4.Zainstalować wymaganą bibliotekę easyAI za pomocą komendy:
+# pip install easyAI
+# 5. Przejść do ścieżki z projektem (w systemie linux komenda cd)
+# 6. Uruchomić projekt przy pomocy polecenia:
+# python TicketToRide.py
 
 from easyAI import TwoPlayerGame
 from easyAI.Player import Human_Player
@@ -172,7 +181,8 @@ class TicketToRide(TwoPlayerGame):
         """
         if self.is_position_valid(pos1 - 1) and self.is_position_valid(pos2 - 1) and self.is_position_valid(pos3 - 1):
             symbol = self.board[pos1 - 1]
-            return symbol == self.board[pos2 - 1] and symbol == self.board[pos3 - 1]
+            temp = symbol == self.board[pos2 - 1] and symbol == self.board[pos3 - 1]
+            return temp
         else:
             return False
 
@@ -223,10 +233,8 @@ class TicketToRide(TwoPlayerGame):
 
         if self.make_three(pos, (pos - self.columns), (pos + self.columns)) \
                 or (self.make_three(pos, (pos - 1), (pos + 1)) and self.are_positions_in_row(pos, pos - 1, pos + 1)) \
-                or (
-                self.is_not_side_border(pos) and self.make_three(pos, (pos - self.columns - 1), (pos + self.columns + 1))) \
-                or (
-                self.is_not_side_border(pos) and self.make_three(pos, (pos - self.columns + 1), (pos + self.columns - 1))):
+                or (self.is_not_side_border(pos) and self.make_three(pos, (pos - self.columns - 1), (pos + self.columns + 1))) \
+                or (self.is_not_side_border(pos) and self.make_three(pos, (pos - self.columns + 1), (pos + self.columns - 1))):
             return True
 
         return False
