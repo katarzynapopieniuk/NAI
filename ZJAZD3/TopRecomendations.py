@@ -1,3 +1,33 @@
+# TYTUŁ: MOVIE RECOMMENDATIONS
+#
+# AUTORZY: Katarzyna Popieniuk s22048 i Jakub Styn s22449
+#
+# ZASADY:
+#- zbuduj silnik rekomendacji filmów lub seriali
+#- zaproponuj 5 filmów interesujących dla wybranego użytkownika, których nie oglądał
+#- zaproponouj 5 film, których nie należy oglądać;
+#
+# OPIS PROBLEMU:
+# 1.Na początku program na podstawie metryki odległośći Euklidesa oblicza najbardziej zbliżonych użytkowników dla usera1 (defualtowo ustawiony Pawel Czapiewski)
+# 2.Następnie z 3 najbardziej zbliżonych osób zostają policzone średnie oceny filmów, które rekomendują (odrzucane są filmy, które user1 ma już wpisane w swojej "bazie")
+# 3.Następnie zostają posortowane od największej oceny do najmniejszej i ograniczone do 5 pozycji (w ten sposób otrzymujemy 5 rekomendacji).
+# 4.Następnie średnie filmowe zostaja posrtowane od najmniejszej do największej oceny i ograniczone do 5 pozycji (w ten sposób otrzymujemy 5 anty rekomendacji)
+# 5.Wynikiem końcowym są 2 listy 5 filmów, które rekomendujemy danemu użytkownikowi i 5 filmów, których mu nie rekomendujemy
+
+# INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
+# 1.Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
+# 2. Pobrać projekt
+# 3. Uruchomić wybraną konsolę/terminal
+# 4.Zainstalować wymaganą bibliotekę easyAI za pomocą komendy:
+# pip install numpy
+# 5. Przejść do ścieżki z projektem (w systemie linux komenda cd)
+# 6. Uruchomić projekt przy pomocy polecenia:
+# python .\TopRecomendations.py --user1 "imię osoby, dla której szukamy rekomendacji"
+# przykładowo:
+# python .\TopRecomendations.py --user1 "Pawel Czapiewski"
+# lub z domyślną wartością (user1 "Pawel Czapiewski")
+# python .\TopRecomendations.py
+
 import argparse
 import json
 import numpy as np
@@ -14,6 +44,30 @@ def build_arg_parser():
 
 # Compute the Euclidean distance score between user1 and user2
 def euclidean_score(dataset, user1, user2):
+    """
+    Calculates score using euclidean distance measure. Score is equal to 1/(1 + euclidean_distance).
+    Score is a number between 0 and 1, where 0 means the lowest possible resemblance in movie taste
+    between users and score equal 1 means the highest resemblance.
+    If there are no common movies between users, the method will return 0.
+    The method will raise TypeError if user1 or user2 is not present in dataset
+
+    Parameters:
+    dataset (dictionary): dataset, should following format:
+       {
+       "first user name": {
+           "first movie": rating,
+           ...
+           "last movie": rating
+       },
+       ...
+       },
+       where rating is int number between 1 and 10
+
+    user1, user2 (string): user names
+
+    Returns:
+    score(float): score given with formula: 1/(1 + euclidean_distance), a number between 0 and 1
+    """
     if user1 not in dataset:
         raise TypeError('Cannot find ' + user1 + ' in the dataset')
 
@@ -74,6 +128,15 @@ def get_recommended(sorted_average_scores, n, user_data):
     return recommended
 
 if __name__ == '__main__':
+    """
+    Algorithm description:
+    - load data from file movie_data.json
+    - calculate score between chosen user and other users
+    - find 3 users with the most similar movie taste
+    - calculate average movie ratings based on found 3 users movie rating
+    - find 5 recommended and not recommended movies based on calculated average ratings 
+    (choose 5 movies with the highest and 5 with the lowest ratings excluding movies already seen by chosen user)
+    """
     args = build_arg_parser().parse_args()
     user1 = args.user1
     scores = {}
