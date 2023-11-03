@@ -1,3 +1,23 @@
+# TYTUŁ: TOP RECOMENDATIONS
+#
+# AUTORZY: Katarzyna Popieniuk s22048 i Jakub Styn s22449
+#
+# OPIS PROBLEMU:
+# 1.Na początku program na podstawie metryki odległośći Euklidesa oblicza najbardziej zbliżonych użytkowników dla usera1 (defualtowo ustawiony Pawel Czapiewski)
+# 2.Następnie z 3 najbardziej zbliżonych osób zostają policzone średnie oceny filmów, które rekomendują (odrzucane są filmy, które user1 ma już wpisane w swojej "bazie")
+# 3.Następnie zostają posortowane od największej oceny do najmniejszej i ograniczone do 5 pozycji (w ten sposób otrzymujemy 5 rekomendacji).
+# 4.Następnie średnie filmowe zostaja posrtowane od najmniejszej do największej oceny i ograniczone do 5 pozycji (w ten sposób otrzymujemy 5 anty rekomendacji)
+# 5.Wynikiem końcowym są 2 listy 5 filmów, które rekomendujemy danemu użytkownikowi i 5 filmów, których mu nie rekomendujemy
+#
+# INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
+# 1.Zainstalować interpreter python w wersji 3+ oraz narzędzie numpy
+# 2. Pobrać projekt
+# 3. Uruchomić wybraną konsolę/terminal
+# 4. Przejść do ścieżki z projektem (w systemie linux komenda cd)
+# 5. Uruchomić projekt przy pomocy polecenia:
+# python TopRecomendations.py --user1 "Nazwa_uzytkownika_dla_ktorego_chcemy_rekomendajce"
+# 6.Lub jeśli chcemy w PyCharmie lub innym IDE możemy odpalić program za pomocą 'Urochom' wtedy program domyślnie wyświetli rekomendacje dla użytkownika 'Pawel Czapiewski'
+
 import argparse
 import json
 import numpy as np
@@ -6,6 +26,12 @@ from collections import OrderedDict
 
 
 def build_arg_parser():
+    """
+        Builds and returns an ArgumentParser for computing similarity scores.
+
+        Returns:
+        argparse.ArgumentParser: An ArgumentParser object configured for computing similarity scores.
+        """
     parser = argparse.ArgumentParser(description='Compute similarity score')
     parser.add_argument('--user1', dest='user1', required=False,
                         help='First user', default='Pawel Czapiewski')
@@ -40,7 +66,21 @@ def euclidean_score(dataset, user1, user2):
 
     return 1 / (1 + np.sqrt(np.sum(squared_diff)))
 
+
 def avg_scores(dataset, n, films):
+    """
+       Compute the average scores for a given dataset and films.
+
+       This function calculates the average scores for a specified number of users from the dataset and their corresponding film ratings.
+
+       Parameters:
+       dataset (dict): A dictionary containing user ratings.
+       n (int): The number of users to consider when computing average scores.
+       films (dict): A dictionary containing film ratings for each user.
+
+       Returns:
+       avg_scores(dict): A dictionary containing the average scores for each film.
+       """
     scores2 = {}
     i = 0
 
@@ -61,7 +101,21 @@ def avg_scores(dataset, n, films):
 
     return avg_scores
 
+
 def get_recommended(sorted_average_scores, n, user_data):
+    """
+        Get a list of recommended films based on sorted average scores and user data.
+
+        This function generates a list of recommended films by considering the top-rated films from the sorted average scores and excluding films already rated by the user.
+
+        Parameters:
+        sorted_average_scores (dict): A dictionary containing sorted average scores for films.
+        n (int): The number of recommended films to return.
+        user_data (dict): A dictionary containing user film ratings.
+
+        Returns:
+        recommended(list): A list of recommended films.
+        """
     recommended = []
     count = 0
     for key, value in sorted_average_scores.items():
@@ -72,6 +126,7 @@ def get_recommended(sorted_average_scores, n, user_data):
             break
 
     return recommended
+
 
 if __name__ == '__main__':
     args = build_arg_parser().parse_args()
@@ -94,8 +149,7 @@ if __name__ == '__main__':
     recommended = get_recommended(sorted_average_scores, 5, data[user1])
     print("Rekomendujemy: ")
     print(recommended)
-    not_recommended = get_recommended(OrderedDict(sorted(average_scores.items(), key=itemgetter(1), reverse=False)), 5, data[user1])
+    not_recommended = get_recommended(OrderedDict(sorted(average_scores.items(), key=itemgetter(1), reverse=False)), 5,
+                                      data[user1])
     print("Odradzamy: ")
     print(not_recommended)
-
-
