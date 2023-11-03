@@ -3,9 +3,9 @@
 # AUTORZY: Katarzyna Popieniuk s22048 i Jakub Styn s22449
 #
 # ZASADY:
-#- zbuduj silnik rekomendacji filmów lub seriali
-#- zaproponuj 5 filmów interesujących dla wybranego użytkownika, których nie oglądał
-#- zaproponouj 5 film, których nie należy oglądać;
+# - zbuduj silnik rekomendacji filmów lub seriali
+# - zaproponuj 5 filmów interesujących dla wybranego użytkownika, których nie oglądał
+# - zaproponouj 5 film, których nie należy oglądać;
 #
 # OPIS PROBLEMU:
 # 1.Na początku program na podstawie metryki odległośći Euklidesa oblicza najbardziej zbliżonych użytkowników dla usera1 (defualtowo ustawiony Pawel Czapiewski)
@@ -161,6 +161,7 @@ def get_recommended(sorted_average_scores, n, user_data):
 
     return recommended
 
+
 if __name__ == '__main__':
     """
     Algorithm description:
@@ -178,20 +179,20 @@ if __name__ == '__main__':
     ratings_file = 'movie_data.json'
 
     with open(ratings_file, 'r', encoding='utf-8') as f:
-        data = json.loads(f.read())
+        movie_data = json.loads(f.read())
 
-    for item in data:
-        if item != user1:
-            scores[item] = euclidean_score(data, user1, item)
+    for user2 in movie_data:
+        if user2 != user1:
+            scores[user2] = euclidean_score(movie_data, user1, user2)
 
     sorted_scores = OrderedDict(sorted(scores.items(), key=itemgetter(1), reverse=True))
 
-    average_scores = avg_scores(sorted_scores, 3, data)
+    average_scores = avg_scores(sorted_scores, 3, movie_data)
     sorted_average_scores = OrderedDict(sorted(average_scores.items(), key=itemgetter(1), reverse=True))
-    recommended = get_recommended(sorted_average_scores, 5, data[user1])
+    recommended = get_recommended(sorted_average_scores, 5, movie_data[user1])
     print("Rekomendujemy: ")
     print(recommended)
     not_recommended = get_recommended(OrderedDict(sorted(average_scores.items(), key=itemgetter(1), reverse=False)), 5,
-                                      data[user1])
+                                      movie_data[user1])
     print("Odradzamy: ")
     print(not_recommended)
