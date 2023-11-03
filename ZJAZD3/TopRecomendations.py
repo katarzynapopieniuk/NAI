@@ -36,6 +36,12 @@ from collections import OrderedDict
 
 
 def build_arg_parser():
+    """
+        Builds and returns an ArgumentParser for computing similarity scores.
+
+        Returns:
+        argparse.ArgumentParser: An ArgumentParser object configured for computing similarity scores.
+        """
     parser = argparse.ArgumentParser(description='Compute similarity score')
     parser.add_argument('--user1', dest='user1', required=False,
                         help='First user', default='Pawel Czapiewski')
@@ -94,7 +100,21 @@ def euclidean_score(dataset, user1, user2):
 
     return 1 / (1 + np.sqrt(np.sum(squared_diff)))
 
+
 def avg_scores(dataset, n, films):
+    """
+       Compute the average scores for a given dataset and films.
+
+       This function calculates the average scores for a specified number of users from the dataset and their corresponding film ratings.
+
+       Parameters:
+       dataset (dict): A dictionary containing user ratings.
+       n (int): The number of users to consider when computing average scores.
+       films (dict): A dictionary containing film ratings for each user.
+
+       Returns:
+       avg_scores(dict): A dictionary containing the average scores for each film.
+       """
     scores2 = {}
     i = 0
 
@@ -115,7 +135,21 @@ def avg_scores(dataset, n, films):
 
     return avg_scores
 
+
 def get_recommended(sorted_average_scores, n, user_data):
+    """
+        Get a list of recommended films based on sorted average scores and user data.
+
+        This function generates a list of recommended films by considering the top-rated films from the sorted average scores and excluding films already rated by the user.
+
+        Parameters:
+        sorted_average_scores (dict): A dictionary containing sorted average scores for films.
+        n (int): The number of recommended films to return.
+        user_data (dict): A dictionary containing user film ratings.
+
+        Returns:
+        recommended(list): A list of recommended films.
+        """
     recommended = []
     count = 0
     for key, value in sorted_average_scores.items():
@@ -157,8 +191,7 @@ if __name__ == '__main__':
     recommended = get_recommended(sorted_average_scores, 5, data[user1])
     print("Rekomendujemy: ")
     print(recommended)
-    not_recommended = get_recommended(OrderedDict(sorted(average_scores.items(), key=itemgetter(1), reverse=False)), 5, data[user1])
+    not_recommended = get_recommended(OrderedDict(sorted(average_scores.items(), key=itemgetter(1), reverse=False)), 5,
+                                      data[user1])
     print("Odradzamy: ")
     print(not_recommended)
-
-
