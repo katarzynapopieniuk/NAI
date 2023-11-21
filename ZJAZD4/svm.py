@@ -25,11 +25,6 @@ def teach_svm(sourceFile):
     data = np.loadtxt(sourceFile, delimiter=',')
     X, y = data[:, :-1], data[:, -1]
 
-
-def teach_svm(sourceFile):
-    data = np.loadtxt(sourceFile, delimiter=',')
-    X, y = data[:, :-1], data[:, -1]
-
     # Split data into training and testing datasets
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.25, random_state=5)
