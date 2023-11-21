@@ -2,7 +2,7 @@
 #
 # AUTORZY: Katarzyna Popieniuk s22048 i Jakub Styn s22449
 #
-# ZASADY:
+# OPIS PROBLEMU:
 # 1. Jeden zbiór danych wybrać do klasyfikacji (z wyłączeniem Irysów)
 # https://machinelearningmastery.com/standard-machine-learning-datasets/
 # 2. Nauczyć Drzewo decyzyjne i SVM klasyfikować dane.
@@ -10,14 +10,11 @@
 # 4. Naucz Drzewo decyzyjne i SVM klasyfikować dane.
 # 5. Pokaż metryki związane z jakością klasyfikacji.
 #
-# OPIS PROBLEMU:
-
-
 # INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
-# 1.Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
+# 1. Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
 # 2. Pobrać projekt
 # 3. Uruchomić wybraną konsolę/terminal
-# 4.Zainstalować wymagane biblioteki za pomocą komend:
+# 4. Zainstalować wymagane biblioteki za pomocą komend:
 # pip install numpy
 # pip install sklearn
 # 5. Przejść do ścieżki z projektem (w systemie linux komenda cd)
