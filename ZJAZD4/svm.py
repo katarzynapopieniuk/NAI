@@ -5,8 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn import svm
 
 warnings.filterwarnings('ignore')
-def teach_svm(sourceFile) :
-        """
+
+
+def teach_svm(sourceFile):
+    """
         Parameters:
         sourceFile (str): Path to the file containing the dataset.
             - supported delimiter: ','
@@ -20,29 +22,34 @@ def teach_svm(sourceFile) :
         builds a SVM classifier, fits it to the training data, and evaluates its performance on
         both the training and test datasets, printing the classification reports for each.
         """
-        data = np.loadtxt(sourceFile, delimiter=',')
-        X, y = data[:, :-1], data[:, -1]
+    data = np.loadtxt(sourceFile, delimiter=',')
+    X, y = data[:, :-1], data[:, -1]
 
-        # Split data into training and testing datasets
-        X_train, X_test, y_train, y_test = train_test_split(
-                X, y, test_size=0.25, random_state=5)
 
-        svc = svm.SVC(kernel='rbf', C=1, gamma=100).fit(X_train, y_train)
+def teach_svm(sourceFile):
+    data = np.loadtxt(sourceFile, delimiter=',')
+    X, y = data[:, :-1], data[:, -1]
 
-        #Train the model using the training sets
-        svc.fit(X_train, y_train)
+    # Split data into training and testing datasets
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.25, random_state=5)
 
-        #Predict the response for test dataset
-        y_pred = svc.predict(X_test)
+    svc = svm.SVC(kernel='rbf', C=1, gamma=100).fit(X_train, y_train)
 
-        # Evaluate classifier performance
-        print("\nSVM")
-        print("\n" + "#"*40)
-        print("\nClassifier performance on training dataset\n")
-        print(classification_report(y_train, svc.predict(X_train)))
-        print("#"*40 + "\n")
+    # Train the model using the training sets
+    svc.fit(X_train, y_train)
 
-        print("#"*40)
-        print("\nClassifier performance on test dataset\n")
-        print(classification_report(y_test, y_pred))
-        print("#"*40 + "\n")
+    # Predict the response for test dataset
+    y_pred = svc.predict(X_test)
+
+    # Evaluate classifier performance
+    print("\nSVM")
+    print("\n" + "#" * 40)
+    print("\nClassifier performance on training dataset\n")
+    print(classification_report(y_train, svc.predict(X_train)))
+    print("#" * 40 + "\n")
+
+    print("#" * 40)
+    print("\nClassifier performance on test dataset\n")
+    print(classification_report(y_test, y_pred))
+    print("#" * 40 + "\n")
