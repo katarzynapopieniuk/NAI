@@ -6,6 +6,20 @@ from sklearn import svm
 
 warnings.filterwarnings('ignore')
 def teach_svm(sourceFile) :
+        """
+        Parameters:
+        sourceFile (str): Path to the file containing the dataset.
+            - supported delimiter: ','
+            - last column should be expected output
+            - all columns should be numeric
+
+        Returns:
+        None
+
+        This function loads the dataset from the specified file, splits it into training and testing datasets,
+        builds a SVM classifier, fits it to the training data, and evaluates its performance on
+        both the training and test datasets, printing the classification reports for each.
+        """
         data = np.loadtxt(sourceFile, delimiter=',')
         X, y = data[:, :-1], data[:, -1]
 
