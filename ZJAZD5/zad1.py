@@ -1,3 +1,22 @@
+# TYTUŁ: NEURAL NETWORKS FOR CLASSIFICATION
+#
+# AUTORZY: Katarzyna Popieniuk s22048 i Jakub Styn s22449
+#
+# OPIS PROBLEMU:
+# 1. Wykorzystać jeden z zbiorów danych z poprzednich ćwiczeń i naucz sieć neuronową.
+#
+# INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
+# 1. Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
+# 2. Pobrać projekt
+# 3. Uruchomić wybraną konsolę/terminal
+# 4. Zainstalować wymagane biblioteki za pomocą komend:
+# pip install pandas
+# pip install sklearn
+# pip install matplotlib
+# 5. Przejść do ścieżki z projektem (w systemie linux komenda cd)
+# 6. Uruchomić projekt przy pomocy polecenia:
+# python .\zad1.py
+
 import warnings
 
 from sklearn.exceptions import ConvergenceWarning
@@ -5,8 +24,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 
 import pandas as pd
+
+"""
+Algorithm description:
+- load data from https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.csv
+- split data between train and test sets
+- train neural network
+- show scores
+- show classifier performance for train set and test set
+"""
 
 warnings.filterwarnings('ignore')
 
@@ -50,3 +79,4 @@ print("#" * 40 + "\n")
 cm = confusion_matrix(y_test, y_preds, normalize='all')
 cmd = ConfusionMatrixDisplay(cm, display_labels=['0','1'])
 cmd.plot()
+plt.show()
