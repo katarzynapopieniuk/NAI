@@ -12,6 +12,7 @@
 # 4. Zainstalować wymagane biblioteki za pomocą komend:
 # pip install pandas
 # pip install sklearn
+# pip install matplotlib
 # 5. Przejść do ścieżki z projektem (w systemie linux komenda cd)
 # 6. Uruchomić projekt przy pomocy polecenia:
 # python .\zad1.py
