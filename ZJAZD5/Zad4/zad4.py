@@ -1,3 +1,37 @@
+# TYTUŁ: NEURAL NETWORKS FOR CLASSIFICATION
+#
+# AUTORZY: Katarzyna Popieniuk s22048 i Jakub Styn s22449
+#
+# OPIS PROBLEMU:
+# 1. Zaproponować własny przypadek użycia sieci neuronowych do problemu klasyfikacji.
+#
+# INSTRUKCJA PRZYGOTOWANIA ŚRODOWISKA
+# 1. Zainstalować interpreter python w wersji 3+ oraz narzędzie pip
+# 2. Pobrać projekt
+# 3. Uruchomić wybraną konsolę/terminal
+# 4. Zainstalować wymagane biblioteki za pomocą komend:
+# pip install tensorflow
+# pip install keras
+# 5. Przejść do ścieżki z projektem (w systemie linux komenda cd)
+# 6. Uruchomić projekt przy pomocy polecenia:
+# python .\zad4.py
+
+"""
+Algorithm description:
+- load train and test datasets
+- train neural network
+- show accuracy for test dataset
+
+Used dataset:
+horses_or_humans,
+https://www.tensorflow.org/datasets/catalog/horses_or_humans?hl=pl
+author = "Laurence Moroney",
+title = "Horses or Humans Dataset",
+month = "feb",
+year = "2019",
+url = "http://laurencemoroney.com/horses-or-humans-dataset"
+"""
+
 from silence_tensorflow import silence_tensorflow
 
 import tensorflow as tf
